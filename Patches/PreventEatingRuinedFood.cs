@@ -16,7 +16,7 @@ namespace HungerRevamped {
 
 	internal static class PreventEatingRuinedFood {
 
-		[HarmonyPatch(typeof(Panel_Inventory), "OnEquip")]
+		[HarmonyPatch(typeof(Panel_Inventory), nameof(Panel_Inventory.OnEquip))]
 		private static class DontAllowUseAtZeroHP {
 			private static bool Prefix(Panel_Inventory __instance) {
 				if (MenuSettings.settings.canEatRuinedFood) return true;

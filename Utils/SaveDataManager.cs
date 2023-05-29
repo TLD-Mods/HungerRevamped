@@ -5,7 +5,7 @@ namespace HungerRevamped
     internal class SaveDataManager
     {
 
-        ModDataManager dm = new ModDataManager("HungerRevamped");
+        ModDataManager dm = new ModDataManager(nameof(HungerRevamped));
         
         public bool Save(string data)
         {

@@ -14,7 +14,7 @@ namespace HungerRevamped
         private static readonly MelonLoader.MelonLogger.Instance logger = new MelonLoader.MelonLogger.Instance(BuildInfo.ModName);
 
 
-        [HarmonyPatch(typeof(SaveGameSystem), "RestoreGlobalData")]
+        [HarmonyPatch(typeof(SaveGameSystem), nameof(SaveGameSystem.RestoreGlobalData))]
         private static class HungerDeserialize
         {
 
@@ -50,7 +50,7 @@ namespace HungerRevamped
             }
         }
 
-        [HarmonyPatch(typeof(SaveGameSystem), "SaveGlobalData")]
+        [HarmonyPatch(typeof(SaveGameSystem), nameof(SaveGameSystem.SaveGlobalData))]
         private static class HungerSerialize
         {
 

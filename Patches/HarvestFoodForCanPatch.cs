@@ -10,7 +10,7 @@ namespace HungerRevamped {
 		 * the food inside the can may be ruined, the can itself should still be usable.
 		 */
 
-		[HarmonyPatch(typeof(FoodItem), "Awake")]
+		[HarmonyPatch(typeof(FoodItem), nameof(FoodItem.Awake))]
 		private static class AllowBreakingDownFoodForContainer {
 			private static void Postfix(FoodItem __instance) {
 				GameObject item = __instance.gameObject;

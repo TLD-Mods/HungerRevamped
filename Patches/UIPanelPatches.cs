@@ -14,7 +14,7 @@ namespace HungerRevamped {
 
 		// Panel_FirstAid
 
-		[HarmonyPatch(typeof(Panel_FirstAid), "Enable", new Type[] { typeof(bool) })]
+		[HarmonyPatch(typeof(Panel_FirstAid), nameof(Panel_FirstAid.Enable), new Type[] { typeof(bool) })]
 		private static class AddStoredCaloriesLabel {
 			private static bool initialized = false;
 

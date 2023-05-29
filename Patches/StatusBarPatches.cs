@@ -4,7 +4,7 @@ using Il2Cpp;
 namespace HungerRevamped {
 	internal static class StatusBarPatches {
 
-		[HarmonyPatch(typeof(GenericStatusBarSpawner), "Awake")]
+		[HarmonyPatch(typeof(GenericStatusBarSpawner), nameof(GenericStatusBarSpawner.Awake))]
 		private static class SetRedLevelAndSprites {
 			private static void Postfix(GenericStatusBarSpawner __instance) {
 				StatusBar statusBar = __instance.m_SpawnedObject.GetComponent<StatusBar>();
@@ -24,7 +24,7 @@ namespace HungerRevamped {
 			}
 		}
 
-		[HarmonyPatch(typeof(StatusBar), "Update")]
+		[HarmonyPatch(typeof(StatusBar), nameof(StatusBar.Update))]
 		private static class SetStatusBarVisuals {
 			private static void Postfix(StatusBar __instance) {
 				if (__instance.m_StatusBarType != StatusBar.StatusBarType.Hunger) return;
@@ -46,7 +46,7 @@ namespace HungerRevamped {
 			}
 		}
 
-		[HarmonyPatch(typeof(StatusBar), "GetRateOfChange")]
+		[HarmonyPatch(typeof(StatusBar), nameof(StatusBar.GetRateOfChange))]
 		private static class FixHungerStatusArrows {
 			private static bool Prefix(StatusBar __instance, ref float __result) {
 				if (__instance.m_StatusBarType != StatusBar.StatusBarType.Hunger) return true;
