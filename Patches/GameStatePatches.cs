@@ -1,14 +1,16 @@
 ﻿using HarmonyLib;
 using Il2Cpp;
+using MelonLoader;
 
 namespace HungerRevamped {
 	internal static class GameStatePatches {
 
 		internal static bool IsApplyingDeferredFoodPoisoning = false;
 
-		[HarmonyPatch(typeof(Hunger), "Start")]
+		[HarmonyPatch(typeof(Hunger), nameof(Hunger.Start))]
 		private static class HungerStart {
-			private static void Prefix(Hunger __instance) {
+			private static void Prefix(Hunger __instance)
+			{
 				if (__instance.m_StartHasBeenCalled)
 					return;
 
@@ -27,16 +29,6 @@ namespace HungerRevamped {
 					return;
 
 				__instance.m_HPDecreasePerDayFromStarving = 0f;
-			}
-		}
-
-		[HarmonyPatch(typeof(WellFed), "Start")]
-		private static class WellFedStart {
-			private static void Prefix(WellFed __instance) {
-				if (__instance.m_StartHasBeenCalled)
-					return;
-
-				__instance.m_MaxConditionBonusPercent = 0f;
 			}
 		}
 
@@ -70,9 +62,12 @@ namespace HungerRevamped {
 			}
 		}
 
-		[HarmonyPatch(typeof(WellFed), "Update")]
-		private static class WellFedNewUpdate {
-			private static bool Prefix(WellFed __instance) {
+		[HarmonyPatch(typeof(WellFed), nameof(WellFed.Update))]
+		private static class WellFedNewUpdate
+		{
+			private static bool Prefix(WellFed __instance)
+			{
+				__instance.m_MaxConditionBonusPercent = 0f;
 				if (GameManager.m_IsPaused)
 					return false;
 
@@ -80,9 +75,11 @@ namespace HungerRevamped {
 				float carryBonus = HungerRevamped.Instance.GetCarryBonus();
 				__instance.m_CarryCapacityBonusKG = carryBonus;
 
-				if (!active && carryBonus >= Tuning.wellFedCarryBonusStart) {
+				if (!active && carryBonus >= Tuning.wellFedCarryBonusStart)
+				{
 					__instance.WellFedStart(__instance.GetCauseLocalizationId(), true, false);
-				} else if (active && carryBonus < Tuning.wellFedCarryBonusEnd) {
+				} else if (active && carryBonus < Tuning.wellFedCarryBonusEnd)
+				{
 					__instance.WellFedEnd();
 				}
 				return false;
