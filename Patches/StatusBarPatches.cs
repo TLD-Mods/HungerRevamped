@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using Il2Cpp;
+using MelonLoader;
 
 namespace HungerRevamped {
 	internal static class StatusBarPatches {
@@ -29,16 +30,16 @@ namespace HungerRevamped {
 			private static void Postfix(StatusBar __instance) {
 				if (__instance.m_StatusBarType != StatusBar.StatusBarType.Hunger) return;
 
-				float fillValue = __instance.GetFillValue();
+				var fill = __instance.GetFillValuesHunger();
 				double storedCalories = HungerRevamped.Instance.storedCalories;
 
 				// Transferring calories out of calorie store
-				Utils.SetActive(__instance.m_DebuffObject, fillValue < Tuning.hungerLevelMalnourished && storedCalories > 0);
+				Utils.SetActive(__instance.m_DebuffObject, fill.m_NormalizedValue < Tuning.hungerLevelMalnourished && storedCalories > 0);
 				// Transferring calories into calorie store
-				Utils.SetActive(__instance.m_BuffObject, fillValue > Tuning.hungerLevelWellFed && storedCalories < Tuning.maximumStoredCalories);
+				Utils.SetActive(__instance.m_BuffObject, fill.m_NormalizedValue > Tuning.hungerLevelWellFed && storedCalories < Tuning.maximumStoredCalories);
 
 				// Starving hunger bar colors
-				if (fillValue < Tuning.hungerLevelStarving) {
+				if (fill.m_NormalizedValue < Tuning.hungerLevelStarving) {
 					__instance.m_OuterBoxSprite.color = InterfaceManager.GetInstance().m_StatusOuterBoxEmptyColor;
                     Utils.SetActive(__instance.m_SpriteWhenEmpty.gameObject, true);
 					__instance.SetActiveBacksplash(__instance.m_BacksplashDepleted);

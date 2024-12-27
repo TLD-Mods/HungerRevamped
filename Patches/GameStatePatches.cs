@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using Il2Cpp;
+using Il2CppTLD.IntBackedUnit;
 using MelonLoader;
 
 namespace HungerRevamped {
@@ -73,7 +74,7 @@ namespace HungerRevamped {
 
 				bool active = __instance.HasWellFed();
 				float carryBonus = HungerRevamped.Instance.GetCarryBonus();
-				__instance.m_CarryCapacityBonusKG = carryBonus;
+				__instance.m_CarryCapacityBonus = ItemWeight.FromKilograms(carryBonus);
 
 				if (!active && carryBonus >= Tuning.wellFedCarryBonusStart)
 				{

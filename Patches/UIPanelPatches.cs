@@ -137,10 +137,10 @@ namespace HungerRevamped {
 				float hours = 0;
 
 				if (__instance.IsTabHarvestSelected()) {
-					targetLabel = __instance.m_Label_HarvestEstimatedCalories;
+					targetLabel = __instance.m_Label_EstimatedCalories;
 					hours = __instance.GetHarvestDurationMinutes() / 60f;
 				} else if (__instance.IsTabQuarterSelected()) {
-					targetLabel = __instance.m_Label_QuarterEstimatedCalories;
+					targetLabel = __instance.m_Label_EstimatedCalories;
 					hours = __instance.GetQuarterDurationMinutes() / 60f;
 				}
 
@@ -171,9 +171,8 @@ namespace HungerRevamped {
 			calorieStoreLabel.text = storedCalories.ToString();
 			calorieStoreLabel.UpdateAnchors();
 
-			UILabel hungerLabel = panel.m_EstimatedCaloriesBurnedLabel;
 			int hungerPercent = Mathf.RoundToInt(simulation.hungerRatio * 100f);
-			hungerLabel.text = hungerPercent.ToString() + "% " + Localization.Get("GAMEPLAY_Hunger");
+			panel.m_BreakdownInfo.m_EstimatedCaloriesBurnedLabel.text = hungerPercent.ToString() + "% " + Localization.Get("GAMEPLAY_Hunger");
 		}
 
 		[HarmonyPatch(typeof(Panel_BreakDown), "UpdateCurrentCaloriesLabel")]

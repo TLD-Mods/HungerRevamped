@@ -24,16 +24,76 @@
 		<DebugType>embedded</DebugType>
 	</PropertyGroup>
 
+    <PropertyGroup>
+        <!--This needs to be changed for the mod to compile.-->
+        <TheLongDarkPath>..\..\</TheLongDarkPath>
+        <MelonLoaderPath>$(TheLongDarkPath)/MelonLoader/net6</MelonLoaderPath>
+        <ManagedPath>$(TheLongDarkPath)/MelonLoader/Managed</ManagedPath>
+        <Il2CppPath>$(TheLongDarkPath)/MelonLoader/Il2CppAssemblies</Il2CppPath>
+        <ModsPath>$(TheLongDarkPath)/Mods</ModsPath>
+        <AssemblySearchPaths>$(AssemblySearchPaths);$(MelonLoaderPath);$(ManagedPath);$(Il2CppPath);$(ModsPath);</AssemblySearchPaths>
+        <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
 	<!--This is the of packages that the mod references.-->
 	<ItemGroup>
 		<!--This package contains almost everything a person could possibly need to reference while modding.-->
-		<PackageReference Include="STBlade.Modding.TLD.Il2CppAssemblies.Windows" Version="2.10.0" />
-		<PackageReference Include="stblade.Modding.TLD.ModData" Version="1.5.1" />
-		<PackageReference Include="STBlade.Modding.TLD.ModSettings" Version="1.9.0" />
+        <Reference Include="Il2CppInterop.Common">
+          <HintPath>..\..\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
+        </Reference>
+        <Reference Include="Il2CppInterop.Runtime">
+          <HintPath>..\..\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="MelonLoader" />
+        <Reference Include="ModData" />
+        <Reference Include="0Harmony" />
+        <Reference Include="Assembly-CSharp" />
+        <Reference Include="Il2CppHOTween" />
+        <Reference Include="Il2Cppmscorlib" />
+        <Reference Include="Il2CppNewtonsoft.Json" />
+        <Reference Include="Il2CppSystem.Configuration" />
+        <Reference Include="Il2CppSystem" />
+        <Reference Include="Il2CppSystem.Runtime.Serialization" />
+        <Reference Include="Il2CppTLD.Addressables" />
+        <Reference Include="Il2CppTLD.Encryption" />
+        <Reference Include="Il2CppTLD.Game.Events.Runtime" />
+        <Reference Include="Il2CppTLD.GameplayTag" />
+        <Reference Include="Il2CppTLD.IO" />
+        <Reference Include="Il2CppTLD.Logging" />
+        <Reference Include="Il2CppTLD.OptionalContent" />
+        <Reference Include="Il2CppTLD.PDID" />
+        <Reference Include="Il2CppTLD.Platform" />
+        <Reference Include="Il2CppTLD.Profiling" />
+        <Reference Include="Il2CppTLD.RuntimeTest" />
+        <Reference Include="Il2CppTLD.SaveState" />
+        <Reference Include="Il2CppTLD.Serialization" />
+        <Reference Include="Il2CppTLD.Stats" />
+        <Reference Include="Il2CppTLD.TimeLib" />
+        <Reference Include="Il2CppTLD.Trial" />
+        <Reference Include="Il2CppTLD.UserGeneratedContent" />
+        <Reference Include="Il2CppTLD.IntBackedUnit" />
+        <Reference Include="ModSettings"/>
+        <Reference Include="Unity.Mathematics" />
+        <Reference Include="Unity.TextMeshPro" />
+        <Reference Include="UnityEngine.AssetBundleModule" />
+        <Reference Include="UnityEngine.CoreModule" />
+        <Reference Include="UnityEngine" />
+        <Reference Include="UnityEngine.InputLegacyModule" />
+        <Reference Include="UnityEngine.InputModule" />
+        <Reference Include="UnityEngine.Il2CppAssetBundleManager" />
+        <Reference Include="UnityEngine.Il2CppImageConversionManager" />
+        <Reference Include="UnityEngine.PhysicsModule">
+          <HintPath>..\..\MelonLoader\Il2CppAssemblies\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
 		<!--The package version here in this template may be outdated and need to be updated. Visual Studio can update package versions automatically.-->
 		<!--If the mod references any other mods (such as ModSettings), that NuGet package will also need to be listed here.-->
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Utils\" />
 	</ItemGroup>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="xcopy /y /d  &quot;$(TargetPath)&quot; &quot;$(TheLongDarkPath)\Mods&quot;" />
+      </Target>
 </Project>

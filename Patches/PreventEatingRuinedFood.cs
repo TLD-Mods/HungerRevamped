@@ -20,7 +20,7 @@ namespace HungerRevamped {
 		private static class DontAllowUseAtZeroHP {
 			private static bool Prefix(Panel_Inventory __instance) {
 				if (MenuSettings.settings.canEatRuinedFood) return true;
-				GearItem gi = __instance.GetCurrentlySelectedGearItem();
+				GearItem gi = __instance.GetCurrentlySelectedItem().m_GearItem;
 				if (gi.m_FoodItem && gi.IsWornOut()) {
 					GameAudioManager.PlayGUIError();
 					return false;
