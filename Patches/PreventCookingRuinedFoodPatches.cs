@@ -35,21 +35,6 @@ namespace HungerRevamped {
 			private static void Postfix(CookableItem __instance, CookingPotItem cookingPot, Inventory inventory, ref CookableItem.Cookablility __result) {
 				if (__result != CookableItem.Cookablility.Cookable) return;
 				if (MenuSettings.settings.canCookRuinedFood) return;
-				Il2CppSystem.Collections.Generic.List<GearItem> temp = new Il2CppSystem.Collections.Generic.List<GearItem>(2);
-				foreach (var igd in __instance.m_Recipe.DishBlueprint.m_RequiredGear)
-				{
-					var nonRuined = 0;
-					inventory.GetItems(igd.m_Item.name, temp);
-					foreach (var gi in temp)
-					{
-						if (!gi.IsWornOut()) nonRuined++;
-					}
-					if (nonRuined < igd.m_Count)
-					{
-						__result = CookableItem.Cookablility.MissingIngredients;
-						return;
-					}
-				}
 			}
 		}
 	}
