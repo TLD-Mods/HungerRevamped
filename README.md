@@ -114,8 +114,9 @@ Canned food items can be harvested for their recycled can if the player cannot (
 
 1. If you haven't done so already, install MelonLoader by downloading and running [MelonLoader.Installer.exe](https://github.com/HerpDerpinstine/MelonLoader/releases/latest/download/MelonLoader.Installer.exe)
 2. If you haven't done so already, install [ModSettings](https://github.com/zeobviouslyfakeacc/ModSettings) v1.6 or newer
-3. Download the latest version of `HungerRevamped.dll` from the [releases page](https://github.com/zeobviouslyfakeacc/HungerRevamped/releases)
-4. Move `HungerRevamped.dll` into the Mods folder in your TLD install directory
+3. If you haven't done so already, install [ModData](https://github.com/dommrogers/ModData)
+4. Download the latest version of `HungerRevamped.dll` from the [releases page](https://github.com/zeobviouslyfakeacc/HungerRevamped/releases)
+5. Move `HungerRevamped.dll` into the Mods folder in your TLD install directory
 
 You can install and use Hunger Revamped in old saves. You'll start with 10 000 stored calories.
 
